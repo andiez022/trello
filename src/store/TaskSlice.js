@@ -98,7 +98,7 @@ export const updateTask = createAsyncThunk("updateTask", async (obj) => {
       due_date: obj.due_date,
       status: obj.status,
     };
-    const request = await axios.patch(
+    const request = await axios.put(
       `https://667178dbe083e62ee43bbf93.mockapi.io/api/v1/todo/${obj.id}`,
       data,
       axiosConfig
