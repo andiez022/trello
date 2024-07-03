@@ -17,7 +17,6 @@ import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
@@ -85,10 +84,10 @@ const AddTaskModal = ({ setAddTaskModal }) => {
       decription: Yup.string()
         .max(500, "Maximum 500 characters")
         .required("Required"),
-      // due_date: Yup.string().nullable().required("Required"),
+      due_date: Yup.string().nullable().required("Required") .typeError("please enter a valid date"),
       status: Yup.string()
         .required("Required")
-        .typeError("please enter a valid date"),
+       
     }),
     onSubmit: (values) => {
       dispatch(
@@ -294,6 +293,9 @@ const AddTaskModal = ({ setAddTaskModal }) => {
                     />
                   </RadioGroup>
                 </FormControl>
+                {formik.errors.status && formik.touched.status && (
+                  <p className="warning">{formik.errors.status}</p>
+                )}
                 {addTaskData?.error && (
                   <div className="error-msg">{addTaskData.error}</div>
                 )}
