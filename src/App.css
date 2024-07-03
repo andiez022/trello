@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  /* background-color: #3179BA; */
+  font-family: "Roboto", sans-serif;
+}
+
+.todo-wrapper {
+  background-color: #74a2ca;
+}
+
+.todo-wrapper h1 {
+  color: #333;
+  font-size: 60px;
+  padding-left: 60px;
+  padding-top: 40px;
+  /* background-color: #3179BA; */
+  margin-top: 0;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo {
+  width: 350px;
+  min-height: 300px;
+  background-color: #dddfe7;
+  border-radius: 4px;
+  margin: 10px 20px;
+}
+.in-progress{
+width: 350px;
+  min-height: 300px;
+  background-color: #dddfe7;
+  border-radius: 4px;
+  margin: 10px 20px;
+}
+.completed {
+    width: 350px;
+  min-height: 300px;
+  background-color: #dddfe7;
+  border-radius: 4px;
+  margin: 10px 20px;
+}
+
+.task {
+  
+}
+
+.task h3 {
+  padding: 12px;
+  padding-top: 24px;
+  text-align: center;
+}
+
+.todo-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+  height: 32px;
+  width: 200px;
+  padding-top: 4px;
+  margin: 0 auto;
+}
+
+.todo-status {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.todo-form {
+  text-align: center;
+}
+
+.add-task {
+  background-color: #a0b0ef;
+  width: 80px;
+  border-radius: 4px;
+  margin: 10px 160px;
+  cursor: pointer;
+}
+
+.warning {
+  color: red;
+  font-size: 12px;
+}
+
+.list-item:hover {
+  background-color: #f7f7f7;
+}
+
+.btn-delete {
+  margin-top: 20px;
+  display: flex;
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1200;
+  overflow: hidden;
+}
+
+.backdrop .custom-modal {
+  width: 450px;
+  height: fit-content;
+  max-height: calc(100dvh - 50px);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 450px) {
+  .backdrop .custom-modal {
+    width: 100%;
+    min-height: 100dvh;
+  }
+}
+
+.custom-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #3d7cb3;
+  color: #fff;
+}
+
+.modal-header div {
+  font-size: 14px;
+  position: relative;
+}
+
+.cancel-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+.cancel-icon:hover {
+  color: rgb(203, 4, 4);
+}
+
+.modal-warning {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.submit-and-cancel {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.error-msg {
+  text-align: center;
+  color: rgb(203, 4, 4);
+  font-size: small;
+  padding-top: 6px;
+}
+
+.display {
+  display: none;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
