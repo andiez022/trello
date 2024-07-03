@@ -15,15 +15,12 @@ import {
 import { addTask } from "../store/TaskSlice";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
-import {
-  
-  DateTimePicker,
-  LocalizationProvider,
-} from "@mui/x-date-pickers";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 //backshadow variants
 const backVariants = {
@@ -237,23 +234,21 @@ const AddTaskModal = ({ setAddTaskModal }) => {
 
                 <div style={{ margin: "0px auto", width: 400 }}>
                   <LocalizationProvider
-                    dateAdapter={AdapterDayjs}
-                    
+                    dateAdapter={AdapterMoment}
+                    adapterLocale="de"
                   >
                     <DemoContainer components={["DateTimePicker"]}>
                       <DateTimePicker
                         label="Due date"
-                        name="due_date"
-                        // selected={due_date}
-                        // onChange={(due_date) => setDue_date(due_date)}
                         selected={formik.values.due_date}
-                        onChange={formik.handleChange}
-                      
+                        onChange={(value) =>
+                          formik.setFieldValue("due_date", value)
+                        }
                       />
                     </DemoContainer>
                   </LocalizationProvider>
+                </div>
 
-                  </div>
                 {formik.errors.due_date && formik.touched.due_date && (
                   <p className="warning">{formik.errors.due_date}</p>
                 )}
