@@ -17,7 +17,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTask } from "../store/TaskSlice";
 import toast from "react-hot-toast";
-import { v4 as uuidv4 } from "uuid";
+
 
 //backshadow variants
 const backVariants = {
@@ -44,6 +44,10 @@ const modalVariants = {
   },
 };
 const EditTaskModal = ({ setEditTaskModal, editTaskObj }) => {
+  //* redux state
+  const { updateTaskLoading, updateTaskData } = useSelector(
+    (state) => state.tasks
+  );
   //close modal
   const handleCloseModal = () => {
     if (!updateTaskLoading) {
@@ -51,10 +55,6 @@ const EditTaskModal = ({ setEditTaskModal, editTaskObj }) => {
     }
   };
 
-  //* redux state
-  const { updateTaskLoading, updateTaskData } = useSelector(
-    (state) => state.tasks
-  );
 
   //*form state
   const [creator, setCreator] = useState(editTaskObj.creator);
@@ -224,7 +224,7 @@ const EditTaskModal = ({ setEditTaskModal, editTaskObj }) => {
                     sx={{ minWidth: 24 }}
                   >
                     {updateTaskLoading ? (
-                      <CircularProgress size={25} loading={updateTaskLoading} />
+                      <CircularProgress size={25} />
                     ) : (
                       "UPDATE"
                     )}

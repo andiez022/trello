@@ -110,7 +110,7 @@ export default function DeleteTaskModal({ setDeleteTaskModal, deleteTaskId }) {
                   sx={{minWidth: 24}}
                 >
                   {deleteTaskLoading ? (
-                    <CircularProgress size={25}  loading={deleteTaskLoading} />
+                    <CircularProgress size={25} />
                   ) : (
                     "DELETE"
                   )}

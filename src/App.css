@@ -6,6 +6,7 @@
 
 .todo-wrapper {
   background-color: #74a2ca;
+  min-height: 800px;
 }
 
 .todo-wrapper h1 {
@@ -123,7 +124,7 @@ width: 350px;
 .backdrop .custom-modal {
   width: 450px;
   height: fit-content;
-  max-height: calc(100dvh - 50px);
+  max-height: calc(110dvh - 50px);
   background-color: #fff;
   display: flex;
   flex-direction: column;

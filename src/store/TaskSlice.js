@@ -15,7 +15,7 @@ export const deleteTask = createAsyncThunk("deleteTask", async (obj) => {
   try {
     const axiosConfig = {
       headers: {
-        Accept: "application.json",
+        Accept: "application/json",
       },
     };
     const request = await axios.delete(
@@ -44,7 +44,7 @@ export const addTask = createAsyncThunk("addTask", async (obj) => {
   try {
     const axiosConfig = {
       headers: {
-        Accept: "application.json",
+        Accept: "application/json",
         // Authorization: `Bearer ${obj.token}`
       },
     };
@@ -63,7 +63,7 @@ export const addTask = createAsyncThunk("addTask", async (obj) => {
       axiosConfig
     );
     const response = await request.data;
-    response.id = obj.id
+    // response.id = obj.id;
     console.log(response);
     //action/payload
     return {
@@ -85,7 +85,7 @@ export const updateTask = createAsyncThunk("updateTask", async (obj) => {
   try {
     const axiosConfig = {
       headers: {
-        Accept: "application.json",
+        Accept: "application/json",
         // Authorization: `Bearer ${obj.token}`
       },
     };
@@ -104,7 +104,7 @@ export const updateTask = createAsyncThunk("updateTask", async (obj) => {
       axiosConfig
     );
     const response = await request.data;
-    response.id = obj.id
+    // response.id = obj.id;
     console.log(response);
     //action/payload
     return {
@@ -196,7 +196,6 @@ const taskSlice = createSlice({
         state.updateTaskLoading = false;
         state.updateTaskData = action.payload;
         const { data, id } = action.payload;
-        //if we have data not null in the action.payload
         if (data) {
           const taskIndex = state.data.findIndex((task) => task.id === id);
           //if task index is found then update that found object with the new one
