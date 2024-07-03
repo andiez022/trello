@@ -11,101 +11,118 @@ export const fetchTasks = createAsyncThunk("fetchTasks", async () => {
 });
 
 //!delete task
-export const deleteTask = createAsyncThunk(
-  "deleteTask",
-  async(obj) => {
-    try {
-      const axiosConfig = {
-        headers:{
-          Accept: "application.json"
-        }
-      };
-      const request = await axios.delete(`https://667178dbe083e62ee43bbf93.mockapi.io/api/v1/todo/${obj.id}`, axiosConfig 
-      );
-      const response = await request.data;
-      console.log(response);
+export const deleteTask = createAsyncThunk("deleteTask", async (obj) => {
+  try {
+    const axiosConfig = {
+      headers: {
+        Accept: "application.json",
+      },
+    };
+    const request = await axios.delete(
+      `https://667178dbe083e62ee43bbf93.mockapi.io/api/v1/todo/${obj.id}`,
+      axiosConfig
+    );
+    const response = await request.data;
+    console.log(response);
     return {
       successMsg: "Task SuccessFully Deleted!",
       error: null,
-      id: obj.id
-    }
-
-
-    }
-    catch(err){
-      console.log(err)
-      return {
-        successMsg: null,
-        error: "Cannot delete this task",
-        id: obj.id
-      }
-    }
+      id: obj.id,
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      successMsg: null,
+      error: "Cannot delete this task",
+      id: obj.id,
+    };
   }
-)
+});
 
 //add task
-export const addTask = createAsyncThunk("addTask", async(obj)=> {
+export const addTask = createAsyncThunk("addTask", async (obj) => {
   try {
     const axiosConfig = {
-      headers:{
+      headers: {
         Accept: "application.json",
         // Authorization: `Bearer ${obj.token}`
-      }
+      },
     };
-    const request = await axios.post(`https://667178dbe083e62ee43bbf93.mockapi.io/api/v1/todo`,obj, axiosConfig 
+    const data = {
+      id: obj.id,
+      creator: obj.creator,
+      assigned_to: obj.assigned_to,
+      title: obj.title,
+      decription: obj.decription,
+      due_date: obj.due_date,
+      status: obj.status,
+    };
+    const request = await axios.post(
+      `https://667178dbe083e62ee43bbf93.mockapi.io/api/v1/todo`,
+      data,
+      axiosConfig
     );
     const response = await request.data;
-    // response.id = obj.id 
-    console.log(response)
+    response.id = obj.id
+    console.log(response);
     //action/payload
     return {
       data: response,
       successMsg: "Task is successfully added",
-      error: null
-    }
-  }
-  catch(err) {
-    console.log(err)
+      error: null,
+    };
+  } catch (err) {
+    console.log(err);
     return {
       data: null,
       successMsg: null,
-      error: 'Cannot add new task'
-    }
+      error: "Cannot add new task",
+    };
   }
-})
+});
 //update task
-export const updateTask = createAsyncThunk("updateTask", async(obj)=> {
+export const updateTask = createAsyncThunk("updateTask", async (obj) => {
   try {
     const axiosConfig = {
-      headers:{
+      headers: {
         Accept: "application.json",
         // Authorization: `Bearer ${obj.token}`
-      }
+      },
     };
-    const request = await axios.patch(`https://667178dbe083e62ee43bbf93.mockapi.io/api/v1/todo/${obj.id}`,obj, axiosConfig 
+    const data = {
+      id: obj.id,
+      creator: obj.creator,
+      assigned_to: obj.assigned_to,
+      title: obj.title,
+      decription: obj.decription,
+      due_date: obj.due_date,
+      status: obj.status,
+    };
+    const request = await axios.patch(
+      `https://667178dbe083e62ee43bbf93.mockapi.io/api/v1/todo/${obj.id}`,
+      data,
+      axiosConfig
     );
     const response = await request.data;
-    // response.id = obj.id 
-    console.log(response)
+    response.id = obj.id
+    console.log(response);
     //action/payload
     return {
       data: response,
       successMsg: "Task updated successfully",
       error: null,
-      id: obj.id
-    }
-  }
-  catch(err) {
-    console.log(err)
+      id: obj.id,
+    };
+  } catch (err) {
+    console.log(err);
     return {
       data: null,
       successMsg: null,
-      error: 'Cannot update task',
-      id: obj.id
-    }
+      error: "Cannot update task",
+      id: obj.id,
+    };
   }
-})
-
+});
 
 const taskSlice = createSlice({
   name: "task",
@@ -122,7 +139,7 @@ const taskSlice = createSlice({
     addTaskData: null,
     //updatee
     updateTaskLoading: false,
-    updateTaskData: null
+    updateTaskData: null,
   },
   extraReducers: (builder) => {
     builder
@@ -146,14 +163,13 @@ const taskSlice = createSlice({
       .addCase(deleteTask.pending, (state) => {
         state.deleteTaskLoading = true;
         state.deleteTaskData = null;
-       
       })
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.deleteTaskLoading = false;
         state.deleteTaskData = action.payload;
-        const {error, id} = action.payload;
-        if(!error) {
-          state.data = state.data.filter((data) => data.id !== id)
+        const { error, id } = action.payload;
+        if (!error) {
+          state.data = state.data.filter((data) => data.id !== id);
         }
       })
       // add task
@@ -161,14 +177,13 @@ const taskSlice = createSlice({
       .addCase(addTask.pending, (state) => {
         state.addTaskLoading = true;
         state.addTaskData = null;
-       
       })
       .addCase(addTask.fulfilled, (state, action) => {
         state.addTaskLoading = false;
         state.addTaskData = action.payload;
-        const {data} = action.payload;
-        if(data) {
-          state.data.unshift(data)
+        const { data } = action.payload;
+        if (data) {
+          state.data.unshift(data);
         }
       })
       // update task
@@ -176,21 +191,20 @@ const taskSlice = createSlice({
       .addCase(updateTask.pending, (state) => {
         state.updateTaskLoading = true;
         state.updateTaskData = null;
-       
       })
       .addCase(updateTask.fulfilled, (state, action) => {
         state.updateTaskLoading = false;
         state.updateTaskData = action.payload;
-        const {data, id} = action.payload;
+        const { data, id } = action.payload;
         //if we have data not null in the action.payload
-        if(data, id) {
-          const taskIndex = state.data.findIndex((task) =>task.id===id);
-          //if task index is found then update that found object with the new one 
-          if(taskIndex !== -1){
-            state.data[taskIndex] = data
+        if (data) {
+          const taskIndex = state.data.findIndex((task) => task.id === id);
+          //if task index is found then update that found object with the new one
+          if (taskIndex !== -1) {
+            state.data[taskIndex] = data;
           }
         }
-      })
+      });
   },
 });
 

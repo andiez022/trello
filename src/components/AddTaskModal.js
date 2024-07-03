@@ -2,7 +2,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, CircularProgress, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+} from "@mui/material";
 import { addTask } from "../store/TaskSlice";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
@@ -52,7 +61,7 @@ const AddTaskModal = ({ setAddTaskModal }) => {
   const [title, setTitle] = useState("");
   const [decription, setDecription] = useState("");
   const [due_date, setDue_date] = useState("");
-  const [status, setStatus] = useState("")
+  const [status, setStatus] = useState("");
 
   //dispatch
   const dispatch = useDispatch();
@@ -67,7 +76,7 @@ const AddTaskModal = ({ setAddTaskModal }) => {
         title,
         decription,
         due_date,
-        status
+        status,
       })
     ).then((res) => {
       if (!res.payload.error) {
@@ -107,7 +116,6 @@ const AddTaskModal = ({ setAddTaskModal }) => {
             </div>
             <div className="modal-body">
               <form className="custom-modal" onSubmit={handleAddTask}>
-                
                 <TextField
                   sx={{ width: 400, margin: "8px auto", marginTop: "16px" }}
                   id="filled-basic"
@@ -145,53 +153,54 @@ const AddTaskModal = ({ setAddTaskModal }) => {
                   onChange={(e) => setDecription(e.target.value)}
                 />
 
-            <div style={{margin: "0px auto", width: 400}}>
-
-                <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="de" >
-                  <DemoContainer components={["DateTimePicker"]}>
-                    <DateTimePicker
-                      label="Due date"
-                      selected={due_date}
-                      onChange={(due_date) => setDue_date(due_date)}
-                     
-                    />
-                  </DemoContainer>
-                </LocalizationProvider>
-            </div>
+                <div style={{ margin: "0px auto", width: 400 }}>
+                  <LocalizationProvider
+                    dateAdapter={AdapterMoment}
+                    adapterLocale="de"
+                  >
+                    <DemoContainer components={["DateTimePicker"]}>
+                      <DateTimePicker
+                        label="Due date"
+                        selected={due_date}
+                        onChange={(due_date) => setDue_date(due_date)}
+                      />
+                    </DemoContainer>
+                  </LocalizationProvider>
+                </div>
 
                 <FormControl sx={{ width: 350, margin: "8px auto" }}>
-                <FormLabel id="demo-radio-buttons-group-label">
-                  Status
-                </FormLabel>
-                <RadioGroup
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="to-do"
-                  name="radio-buttons-group"
-                  row
-                >
-                  <FormControlLabel
-                    value="to-do"
-                    control={<Radio />}
-                    label="To do"
-                    checked={status === 'to-do'}
-                    onChange={(e) => setStatus(e.target.value)}
-                  />
-                  <FormControlLabel
-                    value="in-progress"
-                    control={<Radio />}
-                    label="In progress"
-                    checked={status === 'in-progress'}
-                    onChange={(e) => setStatus(e.target.value)}
-                  />
-                  <FormControlLabel
-                    value="completed"
-                    control={<Radio />}
-                    label="Completed"
-                    checked={status === 'completed'}
-                    onChange={(e) => setStatus(e.target.value)}
-                  />
-                </RadioGroup>
-              </FormControl>
+                  <FormLabel id="demo-radio-buttons-group-label">
+                    Status
+                  </FormLabel>
+                  <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="to-do"
+                    name="radio-buttons-group"
+                    row
+                  >
+                    <FormControlLabel
+                      value="to-do"
+                      control={<Radio />}
+                      label="To do"
+                      checked={status === "to-do"}
+                      onChange={(e) => setStatus(e.target.value)}
+                    />
+                    <FormControlLabel
+                      value="in-progress"
+                      control={<Radio />}
+                      label="In progress"
+                      checked={status === "in-progress"}
+                      onChange={(e) => setStatus(e.target.value)}
+                    />
+                    <FormControlLabel
+                      value="completed"
+                      control={<Radio />}
+                      label="Completed"
+                      checked={status === "completed"}
+                      onChange={(e) => setStatus(e.target.value)}
+                    />
+                  </RadioGroup>
+                </FormControl>
 
                 {addTaskData?.error && (
                   <div className="error-msg">{addTaskData.error}</div>
