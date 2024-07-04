@@ -7,10 +7,14 @@
 .todo-wrapper {
   background-color: #74a2ca;
   min-height: 800px;
+  background-image: url(https://i.pinimg.com/originals/fe/18/4a/fe184a8b8c9c00cc2b5b7d89a086f215.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
 .todo-wrapper h1 {
-  color: #333;
+  color: #f3f3f3;
   font-size: 60px;
   padding-left: 60px;
   padding-top: 40px;
@@ -62,6 +66,7 @@ width: 350px;
   width: 200px;
   padding-top: 4px;
   margin: 0 auto;
+  margin-top: 4px;
 }
 
 .todo-status {
@@ -89,6 +94,11 @@ width: 350px;
 
 .list-item:hover {
   background-color: #f7f7f7;
+  border-left: 5px solid #687fd7;
+}
+.list-item{
+  border-left: 5px solid #fff;
+ 
 }
 
 .btn-delete {
@@ -105,6 +115,7 @@ width: 350px;
 .card-btn {
   display: flex;
   justify-content: flex-end;
+  
 }
 
 .backdrop {
@@ -190,4 +201,12 @@ width: 350px;
   position: fixed;
   top: 50%;
   left: 50%;
+}
+
+.expand-icon {
+  position: absolute;
+  left: 28%;
+}
+.expand-icon:hover {
+  background-color: gray;
 }

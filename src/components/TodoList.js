@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, version } from "react";
 // import { fetchAllTask } from "../services/taskService";
 import CardItem from "./CardItem";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,8 @@ import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddTaskModal from "./AddTaskModal";
 import EditTaskModal from "./EditTaskModal";
+import { closestCenter, closestCorners, DndContext } from "@dnd-kit/core";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
 export default function TodoList() {
   // const [listTasks, setListTasks] = useState([]);
@@ -83,7 +85,7 @@ export default function TodoList() {
     <>
       {loading ? (
         <div className="loading-screen">
-          <CircularIndeterminate size={30} ></CircularIndeterminate>
+          <CircularIndeterminate size={30}></CircularIndeterminate>
         </div>
       ) : (
         <>
@@ -101,23 +103,27 @@ export default function TodoList() {
                     color="white"
                     aria-label="add"
                     onClick={() => setAddTaskModal(true)}
-                    sx={{display:'flex', margin: " 0 auto"}}
+                    sx={{ display: "flex", margin: " 0 auto" }}
                   >
                     <AddIcon />
                   </Fab>
-
-                  {filterTodo &&
-                    filterTodo.length > 0 &&
-                    filterTodo.map((item, index) => {
-                      return (
-                        <CardItem
-                          task={item}
-                          key={`tasks-${index}`}
-                          handleDeleteModal={handleDeleteModal}
-                          handleEditModal={handleEditModal}
-                        />
-                      );
-                    })}
+                  <DndContext collisionDetection={closestCorners}>
+                   
+                    {filterTodo &&
+                      filterTodo.length > 0 &&
+                      filterTodo.map((item, index) => {
+                        return (
+                          
+                          <CardItem
+                            task={item}
+                            key={`tasks-${index}`}
+                            handleDeleteModal={handleDeleteModal}
+                            handleEditModal={handleEditModal}
+                            />
+                           
+                        );
+                      })}
+                  </DndContext>
                 </div>
                 <div className="task in-progress">
                   <Toaster />
@@ -128,7 +134,7 @@ export default function TodoList() {
                     color="white"
                     aria-label="add"
                     onClick={() => setAddTaskModal(true)}
-                    sx={{display:'flex', margin: " 0 auto"}}
+                    sx={{ display: "flex", margin: " 0 auto" }}
                   >
                     <AddIcon />
                   </Fab>
@@ -155,7 +161,7 @@ export default function TodoList() {
                     color="white"
                     aria-label="add"
                     onClick={() => setAddTaskModal(true)}
-                    sx={{display:'flex', margin: " 0 auto"}}
+                    sx={{ display: "flex", margin: " 0 auto" }}
                   >
                     <AddIcon />
                   </Fab>
@@ -188,8 +194,8 @@ export default function TodoList() {
       {/* add modal */}
       {addTaskModal && <AddTaskModal setAddTaskModal={setAddTaskModal} />}
 
-       {/* edit modal */}
-       {editTaskModal && (
+      {/* edit modal */}
+      {editTaskModal && (
         <EditTaskModal
           setEditTaskModal={setEditTaskModal}
           editTaskObj={editTaskObj}

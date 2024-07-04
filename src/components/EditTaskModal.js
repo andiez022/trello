@@ -220,6 +220,7 @@ const EditTaskModal = ({ setEditTaskModal, editTaskObj }) => {
                     <DemoContainer components={["DateTimePicker"]}>
                       <DateTimePicker
                         label="Due date"
+                        // value={formik.values.due_date}
                         selected={formik.values.due_date}
                         onChange={(value) =>
                           formik.setFieldValue("due_date", value)

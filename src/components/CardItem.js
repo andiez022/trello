@@ -21,10 +21,10 @@ export default function CardItem({ task, handleDeleteModal, handleEditModal }) {
       <React.Fragment>
         <CardContent>
           <Typography sx={{ fontSize: 12 }}>
-            <span style={{ fontWeight: "bold" }}>Creator:</span> {task.creator}
+            <span style={{ fontWeight: "bold", backgroundColor: "#f6d5f5" }}>Creator:</span> {task.creator}
           </Typography>
           <Typography sx={{ fontSize: 12 }}>
-            <span style={{ fontWeight: "bold" }}> Assigned to:</span>{" "}
+            <span style={{ fontWeight: "bold", backgroundColor: "#f6d5f5" }}> Assigned to:</span>{" "}
             {task.assigned_to}
           </Typography>
           <Typography
@@ -37,7 +37,7 @@ export default function CardItem({ task, handleDeleteModal, handleEditModal }) {
           </Typography>
 
           <div className="todo-date">
-            <CalendarTodayIcon sx={{ fontSize: 12 }}></CalendarTodayIcon>
+            <CalendarTodayIcon sx={{ fontSize: 12, marginRight: 1, marginBottom: '2px' }}></CalendarTodayIcon>
             <Typography sx={{ fontSize: 12 }}>{task.due_date}</Typography>
           </div>
         </CardContent>
